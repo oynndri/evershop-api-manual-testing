@@ -1,99 +1,85 @@
-cat <<EOF > README.md
-# Evershop E-Commerce Testing Project
 
-## Project Description
-This repository documents the Quality Assurance (QA) lifecycle for the Evershop E-Commerce platform, specifically focusing on the **Search** and **Shopping Cart** modules. The project involves Requirement Analysis, Test Planning, Manual Test Execution (UI), Automated API Testing, and Defect Reporting.
+# QA Test Report: Evershop E-Commerce Application
 
-The primary objective was to validate the "Happy Path" user journey—searching for a specific product ("Stainless Steel Thermos"), adding it to the cart, and verifying the cart contents—while also rigorously stress-testing the Search algorithm against the client's specific requirements for fuzzy logic, mixed languages (Banglish), and special characters.
+## 1. Executive Summary
+This repository documents the Quality Assurance (QA) lifecycle for the Evershop E-Commerce platform. The project scope included Requirement Analysis, Test Planning, Manual UI Testing, and Automated API Validation.
 
-## Repository Structure & Artifacts
+The primary objective was to validate the "Search" and "Shopping Cart" modules against specific client requirements, including fuzzy search logic, localization support, and inventory visibility.
 
-| File Name | Description |
-|-----------|-------------|
-| **Question-1.docx** | [cite_start]Requirement Analysis containing 10 high-priority questions posed to the client regarding search logic, localization, and UI behavior[cite: 82, 83]. |
-| **Question 2 & 3.xlsx** | [cite_start]Comprehensive Test Suite for the Search Feature containing 55 detailed test cases with execution status[cite: 22]. |
-| **Question_4.xlsx (UI)** | [cite_start]UI Test Cases covering the core "Happy Path" flow on the Chrome browser[cite: 1]. |
-| **Question_4.xlsx (API)** | [cite_start]API Test Cases using Postman to verify backend logic matches UI behavior[cite: 3]. |
-| **Question_4.xlsx (Defect)** | [cite_start]Defect Report logging issues found during execution, including severity and reproduction steps[cite: 7]. |
-| **Evershop api.postman_collection.json** | Exported Postman Collection containing the GraphQL and REST requests used for backend validation. |
-| **Test Feedback.docx** | [cite_start]Final executive summary of the testing cycle, confirming the end-to-end journey success[cite: 8]. |
+**Project Status:** Completed
+**Test Type:** Manual (Black Box) & API (Postman)
 
 ---
 
-## Requirement Analysis & Client Constraints
-Before testing, a consultation was held to clarify the "Search" feature specifications. Key requirements confirmed by the client included:
+## 2. Repository Artifacts
+The following files are included in this repository to provide full traceability of the testing cycle:
 
-1.  [cite_start]**Partial Match Support:** The system must support incomplete words (e.g., "therm" for "Thermos")[cite: 87, 88].
-2.  [cite_start]**Mixed Language Support:** The system must handle "Banglish" (e.g., "Thermos bottol" or "stil flask")[cite: 96, 97].
-3.  [cite_start]**Out of Stock Visibility:** Out-of-stock items must remain visible in search results[cite: 94, 95].
-4.  [cite_start]**Voice Command:** The system is intended to support voice search in English and Banglish[cite: 107, 108].
-
----
-
-## Test Execution Metrics
-
-### 1. Search Module (Deep Dive)
-A total of **55 test cases** were executed to validate the Search logic.
-* **Total Executed:** 55
-* **Passed:** 14 (25.45%)
-* **Failed:** 18 (32.73%)
-* [cite_start]**N/A (Blocked/Not Implemented):** 23 (41.82%)[cite: 22].
-
-#### Critical Failure Analysis (Requirement vs. Actual)
-Several high-priority requirements failed during validation:
-* [cite_start]**Partial Search Failed:** Searching for "therm", "ermo", or "mos" resulted in "No results found," contradicting the client requirement for partial matching[cite: 27, 28, 29, 30].
-* [cite_start]**Spelling & Localization Failed:** The system failed to handle common spelling mistakes (e.g., "Steel tharmos") and mixed language inputs ("Stil thermos"), which were explicit client requests[cite: 52, 53].
-* [cite_start]**Highlighting Failed:** Search keywords were not highlighted in product titles or descriptions as requested[cite: 69, 70].
-
-#### Blocked Scenarios (N/A)
-Testing for "Voice Search" and "Category Filtering" was blocked because the features were not present in the current build:
-* [cite_start]Voice search test cases (TC_50 to TC_55) were marked N/A due to the absence of a microphone icon[cite: 72, 73].
-* [cite_start]Category-specific search (TC_01 to TC_05) was blocked as the homepage lacked category selection filters[cite: 23, 24].
-
-### 2. Functional "Happy Path" (UI & API)
-The core business flow was validated successfully across both UI and API layers.
-
-**Test Data Used:**
-* **Product:** Stainless Steel Thermos
-* [cite_start]**Product ID:** 18 [cite: 5]
-* [cite_start]**Quantity:** 11 [cite: 1, 5]
-* [cite_start]**Unit Price:** 35 [cite: 1]
-
-**Results:**
-* **UI Testing:** 100% Pass. [cite_start]The user could successfully search, view, and add 11 items to the cart[cite: 1].
-* **API Testing:** 100% Pass. The API correctly processed the request `{"sku":"THERMO-005-BLK","qty":2}` and returned the correct cart totals.
+| File Name | Content Description |
+|:---|:---|
+| **Question-1.docx** | Requirement elicitation and client Q&A log[cite: 78]. |
+| **Question 2 & 3.xlsx** | Comprehensive Test Suite for the Search feature (55 Test Cases). |
+| **Question_4.xlsx** | Consolidated workbook containing UI Test Cases, API Test Cases, and Defect Reports[cite: 1, 3, 7]. |
+| **Evershop api.postman_collection.json** | Automation scripts for backend API validation (Search and Cart endpoints). |
+| **Test Feedback.docx** | Final test summary and executive sign-off[cite: 8]. |
 
 ---
 
-## Defect Report
-A total of 2 defects were logged. One was closed as a non-issue, while one functional usability bug remains open.
+## 3. Test Execution Metrics
 
-| ID | Module | Severity | Summary | Status |
-|----|--------|----------|---------|--------|
-| **BUG-02** | Cart | Low | **Color variant (White) not validated separately.** When adding products with different variants, the cart displays the total quantity but does not visually distinguish between the Black and White variants in the list view. | [cite_start]**Open** [cite: 7] |
+### 3.1 Search Module Analysis
+A total of 55 test cases were executed to validate the search algorithm's compliance with client specifications.
 
----
+| Status | Count | Percentage | Description |
+|:---|:---:|:---:|:---|
+| **Passed** | 14 | 25.45% | Functionality works as expected. |
+| **Failed** | 18 | 32.73% | Functionality contradicts requirements. |
+| **N/A** | 23 | 41.82% | Blocked due to missing features (Category Filters, Voice Search). |
+| **Total** | **55** | **100%** | |
 
-## Technical Details: API Validation
-The API testing was performed using Postman targeting the `demo.evershop.io` environment.
-
-**Endpoints Verified:**
-1.  **Product Search (GraphQL):**
-    * **URL:** `https://demo.evershop.io/api/graphql`
-    * **Operation:** Querying `products(filters: [{key: "keyword", value: "stainless steel thermos"}])`
-    * **Result:** Verified `productId`, `sku`, and `price` fields.
-
-2.  **Add to Cart (REST):**
-    * **URL:** `https://demo.evershop.io/api/cart/{cart_uuid}/items`
-    * **Method:** POST
-    * **Payload:** `{"sku":"THERMO-005-BLK","qty":2}`
-    * **Result:** 200 OK, Item added successfully.
+### 3.2 Failure Root Cause Analysis
+The failures in the Search module were mapped to specific unmet requirements:
+1.  **Partial Match Failure:** The system fails to return results for partial keywords (e.g., "therm" or "steel")[cite: 27, 28].
+2.  **Localization Failure:** The system does not support mixed-language queries (e.g., "Stil thermos") as requested by the client[cite: 53].
+3.  **Spelling Error Tolerance:** Common spelling mistakes (e.g., "tharmos") result in zero search results[cite: 52].
 
 ---
 
-## Conclusion
-The application is stable for the primary "Happy Path" user journey. However, the **Search Module requires significant development work** to meet the client's requirements regarding fuzzy search, localization (Banglish), and UI feedback (keyword highlighting). The Voice Search feature is currently missing entirely.
+## 4. Defect Report
+The following defects were identified and logged during the testing cycle.
 
-**Tested By:** Oynndrila Singh Purkayestha
-**Date:** 2026-01-15
-EOF
+| ID | Module | Severity | Issue Summary | Status |
+|:---|:---|:---|:---|:---|
+| **BUG-01** | Search & Cart | N/A | No functional bug found in the happy path. | [cite_start]Closed [cite: 7] |
+| **BUG-02** | Cart | **Low** | **Variant Display Issue:** When adding products with specific variants (e.g., White vs. Black), the cart displays the correct quantity but fails to visually distinguish the specific color variant selected. | [cite_start]**Open** [cite: 7] |
+
+---
+
+## 5. Technical Validation (API vs. UI)
+Cross-layer testing was performed to ensure data consistency between the user interface and the backend API[cite: 17].
+
+**Test Scenario:** Search for "Stainless Steel Thermos", Add 11 units to Cart, Verify Totals.
+
+| Step | UI Result | API Result (Postman) | Verdict |
+|:---|:---|:---|:---|
+| **Search** | Product displayed correctly[cite: 1]. | GraphQL Query returned valid Product ID and SKU[cite: 4]. | **PASS** |
+| **Add to Cart** | Item added with Quantity 11[cite: 2]. | REST POST request returned Status 200 OK[cite: 5]. | **PASS** |
+| **Cart View** | Total Price validated as 385[cite: 2]. | API Response confirmed Total Price: 385[cite: 6]. | **PASS** |
+
+---
+
+## 6. Requirements Traceability
+This testing cycle was grounded in the following requirements confirmed by the client:
+
+* **R-01:** The search engine must support mixed languages (e.g., Banglish)[cite: 98].
+* **R-02:** The system must highlight matching keywords in product descriptions[cite: 106].
+* **R-03:** Out-of-stock products must remain visible in search results[cite: 95].
+* **R-04:** Voice command support is required (currently missing)[cite: 107].
+
+---
+
+## 7. Author
+**Name:** Oynndrila Singh Purkayestha 
+
+**Role:** QA Engineer / Manual Tester
+
+**Date:** 2026-01-15 
